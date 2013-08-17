@@ -8,7 +8,7 @@ module Capybara::Poltergeist
   # a message. So it is basically operating a request/response cycle (which is not
   # how Web Sockets are usually used, but it's what we want here, as we want to
   # send a message to PhantomJS and then wait for it to respond).
-  class WebSocketServer
+  class SyncWebSocketServer
     # How much to try to read from the socket at once (it's kinda arbitrary because we
     # just keep reading until we've received a full frame)
     RECV_SIZE = 1024

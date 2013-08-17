@@ -515,6 +515,18 @@ module Capybara::Poltergeist
       end
     end
 
+    it "invokes the page load callbacks" do
+      callback_count = 0
+      @driver.add_page_load_callback { callback_count += 1 }
+       
+      @session.visit '/'
+      @session.evaluate_script 'window.location.href = "/poltergeist/simple"'
+
+      sleep 0.5
+
+      callback_count.should == 2
+    end
+
     it 'lists the open windows' do
       @session.visit '/'
 
