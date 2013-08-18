@@ -38,10 +38,10 @@ module Capybara::Poltergeist
 
     def close
       @thread.terminate
-      @server.close_read
-      @server.close_write
-      @socket.close_read
-      @socket.close_write
+      @server.close_read if @server
+      @server.close_write if @server
+      @socket.close_read if @socket
+      @socket.close_write if @socket
     end
 
     def port
