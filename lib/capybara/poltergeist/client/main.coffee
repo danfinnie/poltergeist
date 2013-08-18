@@ -23,6 +23,9 @@ class Poltergeist
   sendResponse: (response) ->
     this.send(response: response)
 
+  sendAsyncResponse: (response) ->
+    this.sendAsync(response: response)
+
   sendError: (error) ->
     this.send(
       error:
@@ -37,6 +40,9 @@ class Poltergeist
     if @running
       @connection.send(data)
       @running = false
+
+  sendAsync: (data) ->
+    @connection.sendAsync(data)
 
 # This is necessary because the remote debugger will wrap the
 # script in a function, causing the Poltergeist variable to

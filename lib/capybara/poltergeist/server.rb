@@ -38,5 +38,9 @@ module Capybara::Poltergeist
     def send(message)
       @sync_socket.send(message) or raise DeadClient.new(message)
     end
+
+    def add_async_message_callback &blk
+      @async_socket.add_message_callback(&blk)
+    end
   end
 end

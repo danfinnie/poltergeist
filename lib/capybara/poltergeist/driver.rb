@@ -14,6 +14,11 @@ module Capybara::Poltergeist
       @server    = nil
       @client    = nil
       @started   = false
+      @page_load_callbacks = []
+    end
+
+    def add_page_load_callback &blk
+      @page_load_callbacks << blk
     end
 
     def needs_server?
@@ -35,7 +40,13 @@ module Capybara::Poltergeist
     end
 
     def server
-      @server ||= Server.new(options[:port], options.fetch(:timeout) { DEFAULT_TIMEOUT })
+      @server ||= begin
+        server = Server.new(options[:port], options.fetch(:timeout) { DEFAULT_TIMEOUT })
+        server.add_async_message_callback do |*args|
+          @page_load_callbacks.each {|p| p.call(*args) }
+        end
+        server
+      end
     end
 
     def client
