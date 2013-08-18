@@ -8,12 +8,12 @@ module Capybara::Poltergeist
       start
     end
 
-    def port
+    def sync_port
       @sync_socket.port
     end
 
-    def socket
-        raise "Deprecated Server#socket"
+    def async_port
+      @async_socket.port
     end
 
     def timeout=(sec)
@@ -21,8 +21,8 @@ module Capybara::Poltergeist
     end
 
     def start
-      @sync_socket = SyncWebSocketServer.new(sync_port, timeout)
-      @async_socket = AsyncWebSocketServer.new(async_port)
+      @async_socket = AsyncWebSocketServer.new(nil)
+      @sync_socket = SyncWebSocketServer.new(fixed_port, timeout)
     end
 
     def stop
@@ -37,16 +37,6 @@ module Capybara::Poltergeist
 
     def send(message)
       @sync_socket.send(message) or raise DeadClient.new(message)
-    end
-
-    private 
-
-    def sync_port
-        fixed_port
-    end
-
-    def async_port
-        fixed_port ? fixed_port + 1 : nil
     end
   end
 end

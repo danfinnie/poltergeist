@@ -95,7 +95,8 @@ module Capybara::Poltergeist
       parts = [path]
       parts.concat phantomjs_options
       parts << PHANTOMJS_SCRIPT
-      parts << server.port
+      parts << server.sync_port
+      parts << server.async_port
       parts.concat window_size
       parts
     end

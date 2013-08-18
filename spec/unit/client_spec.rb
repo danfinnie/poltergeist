@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Capybara::Poltergeist
   describe Client do
-    let(:server) { double(port: 6000) }
+    let(:server) { double(sync_port: 6000, async_port: 3000) }
     let(:client_params) { {} }
     subject { Client.new(server, client_params) }
 
