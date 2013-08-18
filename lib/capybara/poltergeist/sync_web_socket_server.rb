@@ -82,9 +82,13 @@ module Capybara::Poltergeist
 
     # Send a message and block until there is a response
     def send(message)
+      $stderr.puts "attempt to send #{message.inspect}"
       accept unless connected?
+      $stderr.puts "sending"
       driver.text(message)
+      $stderr.puts "attept to receive"
       receive
+      $stderr.puts "send and received"
     rescue Errno::EWOULDBLOCK
       raise TimeoutError.new(message)
     end

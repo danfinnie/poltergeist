@@ -18,8 +18,10 @@ module Capybara::Poltergeist
 
       Thread.abort_on_exception = true
       @thread = Thread.new do
+         sleep 0.5
          @socket = @server.accept
          loop do
+         sleep 0.5
            IO.select([@socket])
            data = @socket.recv(RECV_SIZE)
            # $stderr.puts "got #{data}" if data && !data.empty?
@@ -33,6 +35,7 @@ module Capybara::Poltergeist
     end
 
     def execute_callbacks(e)
+      $stderr.puts "yolo! #{e.inspect}"
       @callbacks.each { |p| p.call(e) }
     end
 

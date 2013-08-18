@@ -23,7 +23,7 @@ class Poltergeist.Browser
 
     @page.onNavigationRequested = (url, navigation) =>
       this.setState 'loading' if @state == 'mouse_event' && navigation == 'FormSubmitted'
-      # @owner.sendAsyncResponse(url: url, navigation: navigation)
+      @owner.sendAsyncResponse(url: url, navigation: navigation)
 
     @page.onLoadFinished = (status) =>
       if @state == 'loading'
