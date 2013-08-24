@@ -88,4 +88,4 @@ phantom.injectJs("#{phantom.libraryPath}/node.js")
 phantom.injectJs("#{phantom.libraryPath}/connection.js")
 phantom.injectJs("#{phantom.libraryPath}/browser.js")
 
-new Poltergeist(phantom.args[0], phantom.args[1], phantom.args[2], phantom.args[3])
+# new Poltergeist(phantom.args[0], phantom.args[1], phantom.args[2], phantom.args[3])

@@ -98,6 +98,7 @@ module Capybara::Poltergeist
       parts << server.sync_port
       parts << server.async_port
       parts.concat window_size
+      $stdout.puts parts.join(" ")
       parts
     end
 
